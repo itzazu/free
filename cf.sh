@@ -3,11 +3,11 @@ red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 apt install jq curl -y
-DOMAIN=rpj08.my.id
+DOMAIN=jateng.santuy.cf
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${sub}.domainkalian.my.id
-CF_ID=akunkalian@gmail.com
-CF_KEY=keykalian
+SUB_DOMAIN=${sub}.wisang.jateng.santuy.cf
+CF_ID=jayston.kingmichael@fineloans.org
+CF_KEY=e971c9fa13e1604f615e28c7bdd2d6427e329
 set -euo pipefail
 IP=$(wget -qO- ifconfig.me/ip);
 echo "Updating DNS for ${SUB_DOMAIN}..."
