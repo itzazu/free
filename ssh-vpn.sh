@@ -42,16 +42,11 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 END
 
-# Getting Edu Template
-wget -q -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/lesta-1/free/main/ovpn-templated.py
-chmod +x /usr/local/bin/edu-ovpn
-
 # Getting Proxy Template
 wget -q -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/lesta-1/free/main/proxy-templated.py
 chmod +x /usr/local/bin/edu-proxy
 
 # Installing Service
-cat > /etc/systemd/system/edu-ovpn.service << END
 cat > /etc/systemd/system/edu-proxy.service << END
 [Unit]
 Description=Python Edu Proxy By Radenpancal Service
@@ -64,7 +59,6 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-ovpn 2084
 ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy 2082
 Restart=on-failure
 
@@ -73,8 +67,6 @@ WantedBy=multi-user.target
 END
 
 systemctl daemon-reload
-systemctl enable edu-ovpn
-systemctl restart edu-ovpn
 systemctl enable edu-proxy
 systemctl restart edu-proxy
 
