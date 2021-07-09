@@ -511,9 +511,9 @@ systemctl enable trojan
 systemctl restart v2ray
 systemctl enable v2ray
 cd /usr/bin
-wget -O add-ws "https://raw.githubusercontent.com/lesta-1/autossh/main/add-ws.sh"
-wget -O add-vless "https://raw.githubusercontent.com/lesta-1/autossh/main/add-vless.sh"
-wget -O add-tr "https://raw.githubusercontent.com/lesta-1/autossh/main/add-tr.sh"
+wget -O add-ws "https://raw.githubusercontent.com/lesta-1/free/main/add-ws.sh"
+wget -O add-vless "https://raw.githubusercontent.com/lesta-1/free/main/add-vless.sh"
+wget -O add-tr "https://raw.githubusercontent.com/lesta-1/free/main/add-tr.sh"
 chmod +x add-ws
 chmod +x add-vless
 chmod +x add-tr
