@@ -90,7 +90,7 @@ echo "   - Whatsapp                : 085601438924"  | tee -a log-install.txt
 echo "   - 
 echo "------------------------------BY WISANGGENI RPJ08-------------------------------" | tee -a log-install.txt
 echo ""
-echo " Reboot 15 Sec"
+echo " Reboot 15 Sec" | tee -a log-install.txt
 sleep 15
 rm -f setup.sh
 reboot
