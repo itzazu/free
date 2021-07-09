@@ -1,96 +1,135 @@
 #!/bin/bash
-if [ "${EUID}" -ne 0 ]; then
-		echo "You need to run this script as root"
-		exit 1
-fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
-
-if [ -f "/etc/v2ray/domain" ]; then
-echo "Script Already Installed"
-exit 0
 fi
-mkdir /var/lib/premium-script;
-echo "IP=" >> /var/lib/premium-script/ipvps.conf
-wget https://raw.githubusercontent.com/lesta-1/free/main/cf.sh && chmod +x cf.sh && ./cf.sh
-#install ssh ovpn
-wget https://raw.githubusercontent.com/lesta-1/free/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
-#install v2ray
-wget https://raw.githubusercontent.com/lesta-1/free/main/ins-vt.sh && chmod +x ins-vt.sh && screen -S v2ray ./ins-vt.sh
-
-rm -f /root/ssh-vpn.sh
-rm -f /root/wg.sh
-rm -f /root/ins-vt.sh
-rm -f /root/ipsec.sh
-cat <<EOF> /etc/systemd/system/autosett.service
-[Unit]
-Description=autosetting
-Documentation=http://rpj08.my.id
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /etc/set.sh
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable autosett
-wget -O /etc/set.sh "https://raw.githubusercontent.com/lesta-1/free/main/set.sh"
-chmod +x /etc/set.sh
-history -c
-echo "1.2" > /home/ver
 clear
-echo " "
-echo "Installation has been completed!!"
-echo " "
-echo "=================================-Autoscript Premium-===========================" | tee -a log-install.txt
-echo "" | tee -a log-install.txt
-echo "--------------------------------------------------------------------------------" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Service & Port"  | tee -a log-install.txt
-echo "   - OpenSSH                 : 22"  | tee -a log-install.txt
-echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 442"  | tee -a log-install.txt
-echo "   - Stunnel4                : 443, 777"  | tee -a log-install.txt
-echo "   - Dropbear                : 109, 143"  | tee -a log-install.txt
-echo "   - Squid Proxy             : 3128, 8080 (limit to IP Server)"  | tee -a log-install.txt
-echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a log-install.txt
-echo "   - Nginx                   : 6969"  | tee -a log-install.txt
-echo "   - V2RAY Vmess TLS         : 8443"  | tee -a log-install.txt
-echo "   - V2RAY Vmess None TLS    : 80"  | tee -a log-install.txt
-echo "   - V2RAY Vless TLS         : 2083"  | tee -a log-install.txt
-echo "   - V2RAY Vless None TLS    : 8880"  | tee -a log-install.txt
-echo "   - Trojan                  : 445"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
-echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
-echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
-echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
-echo "   - IPtables                : [ON]"  | tee -a log-install.txt
-echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
-echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On 05.00 GMT +7" | tee -a log-install.txt
-echo "   - Autobackup Data" | tee -a log-install.txt
-echo "   - Restore Data" | tee -a log-install.txt
-echo "   - Auto Delete Expired Account" | tee -a log-install.txt
-echo "   - Full Orders For Various Services" | tee -a log-install.txt
-echo "   - White Label" | tee -a log-install.txt
-echo "   - Installation Log --> /root/log-install.txt"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   - Dev/Main                : RPJ Projectr"  | tee -a log-install.txt
-echo "   - Telegram                : T.me/RPJ258"  | tee -a log-install.txt
-echo "   - Instagram               : @-"  | tee -a log-install.txt
-echo "   - Whatsapp                : 085601438924"  | tee -a log-install.txt
-echo "   - 
-echo "------------------------------BY WISANGGENI RPJ08-------------------------------" | tee -a log-install.txt
-echo ""
-echo " Reboot 15 Sec" | tee -a log-install.txt
-sleep 15
-rm -f setup.sh
+echo -e   ""
+cat /usr/bin/bannerku | lolcat  
+    cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+   	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+	tram=$( free -m | awk 'NR==2 {print $2}' )
+	swap=$( free -m | awk 'NR==4 {print $2}' )
+	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
+    echo -e  ""
+	echo -e    "    \e[032;1mCPU Model:\e[0m $cname"
+	echo -e    "    \e[032;1mNumber Of Cores:\e[0m $cores"
+	echo -e    "    \e[032;1mCPU Frequency:\e[0m $freq MHz"
+	echo -e    "    \e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+	echo -e    "    \e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
+	echo -e    "    \e[032;1mSystem Uptime:\e[0m $up"
+echo -e  ""
+echo -e  "   -------------------------MENU OPTIONS------------------------" | lolcat
+echo -e   "   1\e[1;33m)\e[m SSH & OpenVPN Menu"
+echo -e   "   2\e[1;33m)\e[m Panel Wireguard "
+echo -e   "   3\e[1;33m)\e[m Panel L2TP & PPTP Account"
+echo -e   "   4\e[1;33m)\e[m Panel SSTP  Account"
+echo -e   "   5\e[1;33m)\e[m Panel SSR & SS Account"
+echo -e   "   6\e[1;33m)\e[m Panel V2Ray"
+echo -e   "   7\e[1;33m)\e[m Panel VLess"
+echo -e   "   8\e[1;33m)\e[m Panel TRojan"
+echo -e   "  \e[1;32m------------------------------------------------------------\e[m" | lolcat
+echo -e   "                            SYSTEM MENU\e[m" | lolcat 
+echo -e   "  \e[1;32m------------------------------------------------------------\e[m" | lolcat
+echo -e   "   9\e[1;33m)\e[m  Add Subdomain Host For VPS"
+echo -e   "   10\e[1;33m)\e[m Renew Certificate V2RAY"
+echo -e   "   11\e[1;33m)\e[m Change Port All Account"
+echo -e   "   12\e[1;33m)\e[m Autobackup Data VPS"
+echo -e   "   13\e[1;33m)\e[m Backup Data VPS"
+echo -e   "   14\e[1;33m)\e[m Restore Data VPS"
+echo -e   "   15\e[1;33m)\e[m Webmin Menu"
+echo -e   "   16\e[1;33m)\e[m Limit Bandwith Speed Server"
+echo -e   "   17\e[1;33m)\e[m Check Usage of VPS Ram" 
+echo -e   "   18\e[1;33m)\e[m Reboot VPS"
+echo -e   "   19\e[1;33m)\e[m Speedtest VPS"
+echo -e   "   20\e[1;33m)\e[m Information Display System" 
+echo -e   "   21\e[1;33m)\e[m Info Script Auto Install"
+echo -e   "   22\e[1;33m)\e[m Install BBR"
+echo -e   "   23\e[1;33m)\e[m Clear-Log"
+echo -e   "  \e[1;32m------------------------------------------------------------\e[m" | lolcat
+echo -e   "   x)   Exit" | lolcat
+echo -e   "  \e[1;32m------------------------------------------------------------\e[m" | lolcat
+echo -e   ""
+read -p "     Select From Options [1-8 or x] :  " menu
+echo -e   ""
+case $menu in
+1)
+ssh
+;;
+2)
+wgr
+;;
+3)
+l2tp
+;;
+4)
+sstpp
+;;
+5)
+ssssr
+;;
+6)
+v2raay
+;;
+7)
+vleess
+;;
+8)
+trojaan
+;;
+9)
+add-host
+;;
+10)
+certv2ray
+;;
+11)
+change
+;;
+12)
+autobackup
+;;
+13)
+backup
+;;
+14)
+restore
+;;
+15)
+wbmn
+;;
+16)
+limit-speed
+;;
+17)
+ram
+;;
+18)
 reboot
+;;
+19)
+speedtest
+;;
+20)
+info
+;;
+21)
+about
+;;
+22)
+bbr
+;;
+23)
+clear-log
+;;
+24)
+user-limit
+;;
+x)
+exit
+;;
+*)
+echo  "Please enter an correct number"
+;;
+esac
