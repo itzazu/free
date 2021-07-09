@@ -69,6 +69,9 @@ about
 11)
 pacth
 ;;
+12)
+add-host
+;;
 x)
 exit
 ;;
