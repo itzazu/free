@@ -90,7 +90,7 @@ echo "   - Whatsapp                : 085601438924"  | tee -a log-install.txt
 echo "   - 
 echo "------------------Script Created By Chock Fighter Academy-----------------" | tee -a log-install.txt
 echo ""
-echo " Reboot 15 Sec"
+echo "Reboot 15 Sec"
 sleep 15
 rm -rf setup.sh
 reboot
