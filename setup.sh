@@ -88,9 +88,8 @@ echo "   - Telegram                : T.me/RPJ258"  | tee -a log-install.txt
 echo "   - Instagram               : @-"  | tee -a log-install.txt
 echo "   - Whatsapp                : 085601438924"  | tee -a log-install.txt
 echo "   - 
-echo "------------------Script Created By Chock Fighter Academy-----------------" | tee -a log-install.txt
+echo "------------------------------BY WISANGGENI RPJ08-------------------------------" | tee -a log-install.txt
 echo ""
-echo "Installation has been completed!!"
 echo " Reboot 15 Sec"
 sleep 15
 rm -f setup.sh
